@@ -59,6 +59,10 @@ Middleware: A Function that ist between dispatching the action and the store.All
     import { configureStore } from "@reduxjs/toolkit";
 ```
 
-> configure store function basically wraps around create store and adds a few fucntionalities to it.
+> configure store function basically wraps around create store and adds a few fucntionalities to it,it will automatically combine our reducers,add the thunk middleware,setup developer tools
 
-> it automatically will combine our reducers,add the thunk middleware,setup developer tools
+```
+  import { createSlice } from "@reduxjs/toolkit";
+```
+
+> it'll automatically create action creators from our reducers.Second, it makes writing these reducers a lot easier because we no longer need that switch statement and also the default case is automatically handled.And third, we can actually mutate now,our state inside reducers.
