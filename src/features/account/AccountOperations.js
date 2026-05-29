@@ -1,7 +1,6 @@
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deposite,withdraw, requestLoan, payloan } from "./accountSlice";
+import { deposite, withdraw, requestLoan, payloan } from "./accountSlice";
 
 function AccountOperations() {
   const [depositAmount, setDepositAmount] = useState("");
@@ -12,36 +11,38 @@ function AccountOperations() {
 
   const dispatch = useDispatch();
 
-  const {loan: currencyLoan, loanPurpose: currentLoanPurpose,balance,isLoading}=useSelector(store=> store.account);
+  const {
+    loan: currencyLoan,
+    loanPurpose: currentLoanPurpose,
+    balance,
+    isLoading,
+  } = useSelector((store) => store.account);
 
   console.log(balance);
 
   function handleDeposit() {
-    if(!depositAmount) return
+    if (!depositAmount) return;
 
-    dispatch(deposite(depositAmount,currency));
-    setDepositAmount("")
-    setCurrency("")
-
+    dispatch(deposite(depositAmount, currency));
+    setDepositAmount("");
+    setCurrency("USD");
   }
 
   function handleWithdrawal() {
-    if(!withdrawalAmount) return;
-    dispatch(withdraw(withdrawalAmount))
-    setWithdrawalAmount("")
-
+    if (!withdrawalAmount) return;
+    dispatch(withdraw(withdrawalAmount));
+    setWithdrawalAmount("");
   }
 
   function handleRequestLoan() {
-    if(!loanAmount || !loanPurpose) return
-    dispatch(requestLoan(loanAmount,loanPurpose));
+    if (!loanAmount || !loanPurpose) return;
+    dispatch(requestLoan(loanAmount, loanPurpose));
     setLoanAmount("");
-    setLoanPurpose("")
+    setLoanPurpose("");
   }
 
   function handlePayLoan() {
-    dispatch(payloan())
-
+    dispatch(payloan());
   }
 
   return (
@@ -65,8 +66,8 @@ function AccountOperations() {
           </select>
 
           <button onClick={handleDeposit} disabled={isLoading}>
-           {isLoading ? "Converting" :  `Deposit ${depositAmount}`}
-            </button>
+            {isLoading ? "Converting" : `Deposit ${depositAmount}`}
+          </button>
         </div>
 
         <div>
@@ -97,10 +98,14 @@ function AccountOperations() {
           <button onClick={handleRequestLoan}>Request loan</button>
         </div>
 
-        {currencyLoan > 0 && <div>
-          <span>Pay back {currencyLoan} [{currentLoanPurpose}]</span>
-          <button onClick={handlePayLoan}>Pay loan</button>
-        </div> }
+        {currencyLoan > 0 && (
+          <div>
+            <span>
+              Pay back {currencyLoan} [{currentLoanPurpose}]
+            </span>
+            <button onClick={handlePayLoan}>Pay loan</button>
+          </div>
+        )}
       </div>
     </div>
   );
