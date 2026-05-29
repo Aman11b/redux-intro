@@ -66,3 +66,42 @@ Middleware: A Function that ist between dispatching the action and the store.All
 ```
 
 > it'll automatically create action creators from our reducers.Second, it makes writing these reducers a lot easier because we no longer need that switch statement and also the default case is automatically handled.And third, we can actually mutate now,our state inside reducers.
+
+## Redux vs Context API
+
+### Context API + useReducer
+
+-> built into react
+
+-> East to set up a single context
+
+-> Additional state "slide" requires new content set up from scrach("provider hell" in App.js)
+-> No mechanism for asynch operation
+-> performance opetimization is a pain
+-> Only React DevTool
+
+### When to use Context API + useReducer
+
+-> Use Context API for global state management in small apps
+
+- When you just need to share a value that doesnt change often(color theme,language authenticate user..)
+- When you need toslve simple prop drilling problem
+- when you need to manage state in a local sub-tree of the app
+  > example in the compound component pattern
+
+### Redux
+
+-> Require additional packages(larger bundle size)
+-> more work to set up initially
+-> once set up,it is easy to create additional state "slices"
+-> supporst middleware for async operations
+-> performance is optimized out of box
+-> Excellent DevTool
+
+### When to use redux
+
+-> use Redux for global state management in large apps
+
+- When you have lots of global UI state that needs to be updated frequently(beacause redux is optimized for this){shopping cart,current atb,complex filters or search...}
+- When you have complex state with nested objects and array(beacause you can mutate state with redux toolkit)
+  > these are not super common in UI state
